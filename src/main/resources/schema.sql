@@ -7,10 +7,8 @@ CREATE TABLE IF NOT EXISTS historial (
     diagnostico TEXT,
     observaciones TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    KEY idx_id_paciente (id_paciente),
+    KEY idx_id_cita (id_cita),
+    KEY idx_fecha (fecha)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Crear índices para mejora de consultas
-CREATE INDEX idx_id_paciente ON historial(id_paciente);
-CREATE INDEX idx_id_cita ON historial(id_cita);
-CREATE INDEX idx_fecha ON historial(fecha);
