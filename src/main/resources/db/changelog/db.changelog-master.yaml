@@ -1,0 +1,71 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1-create-historial-table
+      author: ms-historial-db
+      changes:
+        - createTable:
+            tableName: historial
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: id_paciente
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: id_cita
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: fecha
+                  type: VARCHAR(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: diagnostico
+                  type: TEXT
+              - column:
+                  name: observaciones
+                  type: TEXT
+              - column:
+                  name: created_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: updated_at
+                  type: TIMESTAMP
+                  defaultValueComputed: CURRENT_TIMESTAMP
+      modifySql:
+        dbms: mysql
+        append:
+          value: " ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci"
+
+  - changeSet:
+      id: 2-create-historial-indexes
+      author: ms-historial-db
+      changes:
+        - createIndex:
+            tableName: historial
+            indexName: idx_id_paciente
+            columns:
+              - column:
+                  name: id_paciente
+        - createIndex:
+            tableName: historial
+            indexName: idx_id_cita
+            columns:
+              - column:
+                  name: id_cita
+        - createIndex:
+            tableName: historial
+            indexName: idx_fecha
+            columns:
+              - column:
+                  name: fecha
