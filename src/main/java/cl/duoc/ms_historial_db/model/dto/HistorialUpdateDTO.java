@@ -1,5 +1,7 @@
 package cl.duoc.ms_historial_db.model.dto;
 
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,11 +13,18 @@ import lombok.Setter;
 @Setter
 public class HistorialUpdateDTO {
 
+    @NotNull(message = "El id del historial es obligatorio")
     private Long id;
+
     private Long pacienteId;
+
     private Long citaId;
+
+    @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "La fecha debe tener el formato yyyy-MM-dd")
     private String fecha;
+
     private String diagnostico;
+
     private String observaciones;
 
 }
